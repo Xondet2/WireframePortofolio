@@ -48,11 +48,11 @@ export function ProjectsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6" style={{ perspective: "1000px" }}>
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className={`group bg-card border border-border transition-all duration-700 hover:border-foreground/20 ${
+              className={`group bg-card border border-border transition-all duration-700 hover:border-foreground/20 transform-style-3d hover:-translate-y-2 hover:rotate-x-4 hover:rotate-y-2 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${index * 100 + 200}ms` }}
