@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import Link from "next/link"
 
 const projects = [
   {
@@ -28,7 +29,7 @@ export function ProjectsSection() {
   return (
     <section id="proyectos" ref={ref} className="py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div 
+        <div
           className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
@@ -36,7 +37,7 @@ export function ProjectsSection() {
           <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground mb-4">
             Portafolio
           </p>
-          <h2 
+          <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
@@ -49,7 +50,7 @@ export function ProjectsSection() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <div 
+            <div
               key={project.title}
               className={`group bg-card border border-border transition-all duration-700 hover:border-foreground/20 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -60,10 +61,10 @@ export function ProjectsSection() {
               <div className="aspect-video bg-muted border-b border-border flex items-center justify-center">
                 <span className="text-xs text-muted-foreground uppercase tracking-wider">Preview</span>
               </div>
-              
+
               {/* Project Info */}
               <div className="p-6 space-y-4">
-                <h3 
+                <h3
                   className="text-lg font-semibold text-foreground"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
@@ -82,10 +83,12 @@ export function ProjectsSection() {
                     </span>
                   ))}
                 </div>
-                <Button variant="ghost" size="sm" className="gap-2 p-0 h-auto hover:bg-transparent hover:text-foreground group/btn">
-                  Ver proyecto
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                </Button>
+                <Link href="https://github.com/Xondet2" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="sm" className="gap-2 p-0 h-auto hover:bg-transparent hover:text-foreground group/btn">
+                    Ver proyecto
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  </Button>
+                </Link>
               </div>
             </div>
           ))}

@@ -1,10 +1,9 @@
 import Link from "next/link"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Mail } from "lucide-react"
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/davidordonez", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/davidordonez", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:contacto@davidordonez.dev", label: "Email" },
+  { icon: Github, href: "https://github.com/Xondet2", label: "GitHub" },
+  { icon: Mail, href: "mailto:david.ordonezla@campusucc.edu.co", label: "Email" },
 ]
 
 export function Footer() {
@@ -12,18 +11,20 @@ export function Footer() {
     <footer className="py-12 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p 
+          <p
             className="text-sm font-medium text-foreground"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             David Ordoñez
           </p>
-          
+
           <div className="flex items-center gap-4">
             {socialLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
                 aria-label={link.label}
               >
@@ -31,7 +32,7 @@ export function Footer() {
               </Link>
             ))}
           </div>
-          
+
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()}
           </p>

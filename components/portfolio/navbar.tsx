@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Download } from "lucide-react"
+import Link from "next/link"
 
 const navItems = [
   { label: "Inicio", href: "#inicio" },
@@ -42,17 +43,17 @@ export function Navbar() {
   }
 
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-background/95 backdrop-blur-sm border-b border-border" 
+        scrolled
+          ? "bg-background/95 backdrop-blur-sm border-b border-border"
           : "bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a 
+          <a
             href="#inicio"
             onClick={(e) => handleSmoothScroll(e, "#inicio")}
             className="text-lg font-semibold tracking-tight text-foreground cursor-pointer"
@@ -73,10 +74,12 @@ export function Navbar() {
                 {item.label}
               </a>
             ))}
-            <Button size="sm" variant="outline" className="gap-2">
-              <Download className="w-4 h-4" />
-              CV
-            </Button>
+            <Link href="/cv.txt" download>
+              <Button size="sm" variant="outline" className="gap-2">
+                <Download className="w-4 h-4" />
+                CV
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -90,7 +93,7 @@ export function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <div 
+        <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
           }`}
@@ -107,10 +110,12 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <Button size="sm" variant="outline" className="gap-2 w-fit mt-2">
-                <Download className="w-4 h-4" />
-                CV
-              </Button>
+              <Link href="/cv.txt" download>
+                <Button size="sm" variant="outline" className="gap-2 w-fit mt-2">
+                  <Download className="w-4 h-4" />
+                  CV
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
