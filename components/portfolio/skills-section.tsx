@@ -26,7 +26,7 @@ const itemVariants: Variants = {
 }
 
 export function SkillsSection() {
-  const { content } = useLanguage()
+  const { content, language } = useLanguage()
   const { skills, ui } = content
 
   return (
@@ -39,6 +39,7 @@ export function SkillsSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div 
+          key={`skills-header-${language}`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -61,6 +62,7 @@ export function SkillsSection() {
         </motion.div>
 
         <motion.div 
+          key={`skills-grid-${language}`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -68,9 +70,9 @@ export function SkillsSection() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {/* Skills Grid Layout */}
-          {skills.map((category) => (
+          {skills.map((category, idx) => (
             <motion.div 
-              key={category.title}
+              key={idx}
               variants={itemVariants}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
               className="bg-card/50 backdrop-blur-md border border-border p-8 hover:border-primary/50 hover:shadow-[0_0_30px_-10px_rgba(var(--primary),0.2)] group relative overflow-hidden"
