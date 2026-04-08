@@ -1,3 +1,5 @@
+"use client"
+
 import { Navbar } from "@/components/portfolio/navbar"
 import { Footer } from "@/components/portfolio/footer"
 import { useLanguage } from "@/context/language-context"
