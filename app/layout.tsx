@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
+import { portfolioData } from "@/lib/portfolio-data"
+
 const inter = Inter({ 
   subsets: ["latin"],
   variable: '--font-inter'
@@ -14,27 +16,52 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'David Ordoñez | Desarrollador de Software',
-  description: 'Portafolio de David Esteban Ordoñez Lasso - Desarrollador enfocado en software, inteligencia artificial y proyectos creativos.',
-  generator: 'v0.app',
+  title: {
+    default: `${portfolioData.es.personalInfo.name} | ${portfolioData.es.personalInfo.title}`,
+    template: `%s | ${portfolioData.es.personalInfo.name}`
+  },
+  description: portfolioData.es.personalInfo.description,
+  keywords: ["Desarrollador de Software", "Next.js", "React", "Inteligencia Artificial", "David Ordoñez", "Portafolio"],
+  authors: [{ name: portfolioData.es.personalInfo.fullName }],
+  creator: portfolioData.es.personalInfo.fullName,
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    url: "https://tu-dominio.com", // Cambiar por tu URL real
+    title: `${portfolioData.es.personalInfo.name} | ${portfolioData.es.personalInfo.title}`,
+    description: portfolioData.es.personalInfo.description,
+    siteName: portfolioData.es.personalInfo.name,
+    images: [
+      {
+        url: "/og-image.png", // Debes crear esta imagen (1200x630)
+        width: 1200,
+        height: 630,
+        alt: `Portafolio de ${portfolioData.es.personalInfo.name}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${portfolioData.es.personalInfo.name} | ${portfolioData.es.personalInfo.title}`,
+    description: portfolioData.es.personalInfo.description,
+    images: ["/og-image.png"],
+    creator: "@tu_usuario", // Cambiar por tu usuario de X
+  },
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
+        url: '/gemini-svg.svg',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/gemini-svg.svg',
   },
 }
+
+import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/context/language-context"
+import { CustomCursor } from "@/components/ui/custom-cursor"
+import { SmoothScroll } from "@/components/smooth-scroll"
 
 export default function RootLayout({
   children,
@@ -42,10 +69,22 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-sans antialiased">
-        {children}
-        <Analytics />
+    <html lang="es" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased cursor-none">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LanguageProvider>
+            <SmoothScroll>
+              <CustomCursor />
+              {children}
+              <Analytics />
+            </SmoothScroll>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
