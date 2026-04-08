@@ -29,11 +29,11 @@ const itemVariants: Variants = {
 }
 
 export function ProjectsSection() {
-  const { content } = useLanguage()
+  const { content, language } = useLanguage()
   const { projects, ui } = content
 
   return (
-    <section id="proyectos" className="py-24 lg:py-32 relative">
+    <section key={`projects-${language}`} id="proyectos" className="py-24 lg:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial="hidden"

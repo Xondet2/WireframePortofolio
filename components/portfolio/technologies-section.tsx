@@ -26,11 +26,11 @@ const itemVariants: Variants = {
 }
 
 export function TechnologiesSection() {
-  const { content } = useLanguage()
+  const { content, language } = useLanguage()
   const { technologies, ui } = content
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden">
+    <section key={`technologies-${language}`} className="py-24 lg:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial="hidden"

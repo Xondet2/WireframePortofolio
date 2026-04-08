@@ -30,7 +30,7 @@ export function SkillsSection() {
   const { skills, ui } = content
 
   return (
-    <section id="habilidades" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
+    <section key={`skills-${language}`} id="habilidades" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full" />
@@ -39,7 +39,6 @@ export function SkillsSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div 
-          key={`skills-header-${language}`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -62,7 +61,6 @@ export function SkillsSection() {
         </motion.div>
 
         <motion.div 
-          key={`skills-grid-${language}`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

@@ -29,11 +29,11 @@ const itemVariants: Variants = {
 }
 
 export function ContactSection() {
-  const { content } = useLanguage()
+  const { content, language } = useLanguage()
   const { socialLinks, ui } = content
 
   return (
-    <section id="contacto" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
+    <section key={`contact-${language}`} id="contacto" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial="hidden"

@@ -8,11 +8,11 @@ import { motion } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 
 export function HeroSection() {
-  const { content } = useLanguage()
+  const { content, language } = useLanguage()
   const { personalInfo, ui } = content
 
   return (
-    <section id="inicio" className="min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <section key={`hero-${language}`} id="inicio" className="min-h-screen flex items-center pt-20 relative overflow-hidden">
       {/* Background animated elements */}
       <motion.div 
         animate={{ 
