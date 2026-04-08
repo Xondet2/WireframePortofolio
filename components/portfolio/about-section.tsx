@@ -1,67 +1,78 @@
 "use client"
 
 import { Code2, Brain, Lightbulb } from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { motion, Variants } from "framer-motion"
+import { useLanguage } from "@/context/language-context"
 
-const highlights = [
-  {
-    icon: Code2,
-    title: "Desarrollo de Software",
-    description: "Creación de aplicaciones web modernas con tecnologías actuales y buenas prácticas de código.",
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
-  {
-    icon: Brain,
-    title: "Inteligencia Artificial",
-    description: "Exploración de soluciones con IA para automatización y generación de contenido.",
+}
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+    },
   },
-  {
-    icon: Lightbulb,
-    title: "Creatividad Digital",
-    description: "Diseño de experiencias interactivas que combinan tecnología y expresión artística.",
-  },
-]
+}
 
 export function AboutSection() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const { content } = useLanguage()
+  const { personalInfo, highlights, ui } = content
 
   return (
-    <section id="sobre-mi" ref={ref} className="py-24 lg:py-32">
+    <section id="sobre-mi" className="py-24 lg:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div 
-          className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="max-w-3xl mx-auto text-center mb-16"
         >
-          <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground mb-4">
-            Perfil
-          </p>
-          <h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6"
+          <motion.p variants={itemVariants} className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
+            {ui.about.badge}
+          </motion.p>
+          <motion.h2 
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Sobre mí
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Soy David Esteban Ordoñez Lasso, un estudiante y desarrollador con pasión por crear 
-            soluciones tecnológicas innovadoras. Me interesa profundamente el desarrollo de software, 
-            la inteligencia artificial y las aplicaciones creativas que mejoran la vida de las personas.
-          </p>
-        </div>
+            {ui.about.title}
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            {ui.about.intro} {personalInfo.fullName}, {personalInfo.longDescription.toLowerCase()}
+          </motion.p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-border">
-          {highlights.map((item, index) => (
-            <div 
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="grid md:grid-cols-3 gap-px bg-border overflow-hidden border border-border"
+        >
+          {highlights.map((item) => (
+            <motion.div 
               key={item.title}
-              className={`bg-card p-8 transition-all duration-700 hover:bg-muted/50 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${index * 100 + 200}ms` }}
+              variants={itemVariants}
+              className="bg-card p-10 group hover:bg-muted/50 transition-colors duration-500"
             >
-              <div className="w-12 h-12 border border-border flex items-center justify-center mb-6">
-                <item.icon className="w-6 h-6 text-foreground" />
+              <div className="w-14 h-14 border border-border flex items-center justify-center mb-8 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/5">
+                <item.icon className="w-6 h-6 text-foreground group-hover:text-primary transition-colors duration-300" />
               </div>
               <h3 
-                className="text-lg font-semibold text-foreground mb-3"
+                className="text-xl font-bold text-foreground mb-4"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 {item.title}
@@ -69,9 +80,9 @@ export function AboutSection() {
               <p className="text-muted-foreground leading-relaxed text-sm">
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

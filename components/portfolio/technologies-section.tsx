@@ -1,64 +1,77 @@
 "use client"
 
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { motion, Variants } from "framer-motion"
+import { useLanguage } from "@/context/language-context"
 
-const technologies = [
-  "Java",
-  "Python",
-  "Next.js",
-  "React",
-  "Tailwind CSS",
-  "SQL",
-  "HTML/CSS",
-  "Inteligencia Artificial",
-  "Web Scraping",
-  "Desarrollo Web",
-  "Git",
-]
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+    },
+  },
+}
 
 export function TechnologiesSection() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const { content } = useLanguage()
+  const { technologies, ui } = content
 
   return (
-    <section ref={ref} className="py-24 lg:py-32">
+    <section className="py-24 lg:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div 
-          className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="max-w-3xl mx-auto text-center mb-16"
         >
-          <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground mb-4">
-            Stack
-          </p>
-          <h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6"
+          <motion.p variants={itemVariants} className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
+            {ui.technologies.badge}
+          </motion.p>
+          <motion.h2 
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Tecnologías
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Herramientas y tecnologías que utilizo en mi trabajo diario.
-          </p>
-        </div>
+            {ui.technologies.title}
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-lg text-muted-foreground max-w-xl mx-auto">
+            {ui.technologies.subtitle}
+          </motion.p>
+        </motion.div>
 
-        <div 
-          className={`flex flex-wrap justify-center gap-3 max-w-3xl mx-auto transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ transitionDelay: "200ms" }}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto"
         >
-          {technologies.map((tech, index) => (
-            <div
+          {technologies.map((tech) => (
+            <motion.div
               key={tech}
-              className={`px-4 py-2 bg-card border border-border text-sm text-foreground transition-all duration-500 hover:border-foreground/30 ${
-                isVisible ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ transitionDelay: `${index * 50 + 300}ms` }}
+              variants={itemVariants}
+              whileHover={{ y: -5, scale: 1.05 }}
+              className="px-6 py-3 bg-card border border-border text-sm font-bold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 rounded-full"
             >
               {tech}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -2,97 +2,121 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-import Link from "next/link"
+import { motion, Variants } from "framer-motion"
+import { useLanguage } from "@/context/language-context"
 
-const projects = [
-  {
-    title: "AXI – Aplicación de Dibujo Creativo",
-    description: "Aplicación enfocada en desarrollar la creatividad mediante ejercicios interactivos para todas las edades.",
-    tags: ["Creatividad", "Interactivo", "UI/UX"],
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
   },
-  {
-    title: "SmartMarketAI",
-    description: "Scraper inteligente de páginas web para análisis de benchmarking utilizando inteligencia artificial.",
-    tags: ["Python", "IA", "Web Scraping", "Análisis"],
+}
+
+const itemVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+    },
   },
-  {
-    title: "Proyectos de Bases de Datos",
-    description: "Análisis y modelado de sistemas de información utilizando diagramas entidad-relación.",
-    tags: ["SQL", "Modelado", "Análisis"],
-  },
-]
+}
 
 export function ProjectsSection() {
-  const { ref, isVisible } = useScrollAnimation<HTMLElement>()
+  const { content } = useLanguage()
+  const { projects, ui } = content
 
   return (
-    <section id="proyectos" ref={ref} className="py-24 lg:py-32">
+    <section id="proyectos" className="py-24 lg:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="max-w-3xl mx-auto text-center mb-16"
         >
-          <p className="text-xs font-medium tracking-wider uppercase text-muted-foreground mb-4">
-            Portafolio
-          </p>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6"
+          <motion.p variants={itemVariants} className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
+            {ui.projects.badge}
+          </motion.p>
+          <motion.h2 
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Proyectos
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Una selección de proyectos en los que he trabajado, combinando tecnología y creatividad.
-          </p>
-        </div>
+            {ui.projects.title}
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-lg text-muted-foreground max-w-xl mx-auto">
+            {ui.projects.subtitle}
+          </motion.p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6" style={{ perspective: "1000px" }}>
-          {projects.map((project, index) => (
-            <div
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {projects.map((project) => (
+            <motion.div 
               key={project.title}
-              className={`group bg-card border border-border transition-all duration-700 hover:border-foreground/20 transform-style-3d hover:-translate-y-2 hover:rotate-x-4 hover:rotate-y-2 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${index * 100 + 200}ms` }}
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              className="group bg-card border border-border overflow-hidden flex flex-col h-full hover:border-primary/30 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(var(--primary),0.1)]"
             >
               {/* Project Preview */}
-              <div className="aspect-video bg-muted border-b border-border flex items-center justify-center">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">Preview</span>
+              <div className="aspect-video bg-muted border-b border-border flex items-center justify-center overflow-hidden relative">
+                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                <span className="text-xs text-muted-foreground uppercase tracking-widest group-hover:scale-110 transition-transform duration-500 z-20">Preview</span>
+                
+                {/* Floating tags on image */}
+                <div className="absolute top-4 right-4 flex flex-col gap-2 z-20">
+                  {project.tags.slice(0, 1).map((tag) => (
+                    <span key={tag} className="px-3 py-1 bg-background/80 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider border border-border rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-
+              
               {/* Project Info */}
-              <div className="p-6 space-y-4">
-                <h3
-                  className="text-lg font-semibold text-foreground"
+              <div className="p-8 space-y-4 flex-grow flex flex-col">
+                <h3 
+                  className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   {project.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed line-clamp-3 text-sm flex-grow">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pt-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 text-xs text-muted-foreground border border-border"
+                      className="px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground bg-muted/30 border border-border transition-all duration-300 group-hover:border-primary/20 group-hover:text-primary/70"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <Link href="https://github.com/Xondet2" target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="sm" className="gap-2 p-0 h-auto hover:bg-transparent hover:text-foreground group/btn">
-                    Ver proyecto
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                <div className="pt-6">
+                  <Button variant="ghost" size="sm" className="gap-2 p-0 h-auto hover:bg-transparent hover:text-primary group/btn font-bold uppercase tracking-widest text-xs">
+                    {ui.projects.explore}
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
                   </Button>
-                </Link>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
