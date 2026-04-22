@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "./fnm/fnm exec --using=20 next dev",
-    "build": "./fnm/fnm exec --using=20 next build",
-    "start": "./fnm/fnm exec --using=20 next start",
-    "lint": "./fnm/fnm exec --using=20 eslint ."
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
