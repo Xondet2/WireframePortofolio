@@ -28,6 +28,9 @@ export function Navbar() {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const isHashLink = href.startsWith("/#")
     
+    // Always close menu on click
+    setIsOpen(false)
+
     if (isHashLink && pathname === "/") {
       e.preventDefault()
       const targetId = href.replace("/#", "")
@@ -42,12 +45,9 @@ export function Navbar() {
           behavior: "smooth"
         })
       }
-    } else if (isHashLink && pathname !== "/") {
-      // Si estamos en otra página (como /blog), dejamos que el Link navegue a la raíz
-      // El scroll al hash ocurrirá automáticamente al cargar el home
-      setIsOpen(false)
     }
-    setIsOpen(false)
+    // For other links (like /blog or hash links from other pages), 
+    // we let the default Link behavior handle it.
   }
 
   return (
@@ -90,9 +90,9 @@ export function Navbar() {
                 href={item.href}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
                 className={`text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer hover:text-primary ${
-                  (pathname === "/" && item.href.startsWith("/#")) || pathname === item.href
+                  pathname === item.href
                     ? "text-primary"
-                    : "text-muted-foreground"
+                    : "text-foreground"
                 }`}
               >
                 {item.label}
@@ -101,10 +101,12 @@ export function Navbar() {
             <div className="flex items-center gap-4 border-l border-border pl-8">
               <LanguageToggle />
               <ThemeToggle />
-              <Button size="sm" variant="outline" className="gap-2 h-10 px-6 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary/5 transition-colors">
-                <Download className="w-4 h-4" />
-                CV
-              </Button>
+              <Link href="/cv.pdf" target="_blank" rel="noopener noreferrer">
+                <Button size="sm" variant="outline" className="gap-2 h-10 px-6 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary/5 transition-colors">
+                  <Download className="w-4 h-4" />
+                  CV
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -136,17 +138,19 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={(e) => handleSmoothScroll(e, item.href)}
-                    className="block px-3 py-4 text-base font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-4 text-base font-bold uppercase tracking-widest text-foreground hover:text-primary transition-colors"
                   >
                     {item.label}
                   </Link>
                 ))}
                 <div className="pt-4 px-3">
-                  <Button className="w-full gap-2 h-12 rounded-full font-bold uppercase tracking-widest text-xs">
-                    <Download className="w-4 h-4" />
-                    Descargar CV
-                  </Button>
+                  <Link href="/cv.pdf" target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full gap-2 h-12 rounded-full font-bold uppercase tracking-widest text-xs">
+                      <Download className="w-4 h-4" />
+                      Descargar CV
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
