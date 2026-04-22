@@ -125,7 +125,7 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
       title: "Desarrollador de Software",
       description: "Desarrollador enfocado en software, inteligencia artificial y proyectos creativos.",
       longDescription: "Estudiante apasionado por la tecnología, el diseño de sistemas y la creación de experiencias digitales innovadoras. Me especializo en desarrollo web y exploración de soluciones con IA.",
-      avatarUrl: "/face.webp",
+      avatarUrl: "/face.png",
       email: "david.ordonezla@campusucc.edu.co",
       socials: {
         github: "https://github.com/Xondet2",
@@ -300,7 +300,7 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
       title: "Software Developer",
       description: "Developer focused on software, artificial intelligence, and creative projects.",
       longDescription: "Passionate student of technology, systems design, and the creation of innovative digital experiences. Specialized in web development and AI solutions exploration.",
-      avatarUrl: "/face.webp",
+      avatarUrl: "/face.png",
       email: "david.ordonezla@campusucc.edu.co",
       socials: {
         github: "https://github.com/Xondet2",
