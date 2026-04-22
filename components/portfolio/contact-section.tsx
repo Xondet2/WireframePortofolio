@@ -5,6 +5,7 @@ import { Mail, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
+import { ContactFormModal } from "./contact-form-modal"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -82,10 +83,12 @@ export function ContactSection() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Button size="lg" className="gap-2 group h-14 px-10 rounded-full text-base font-bold uppercase tracking-widest">
-              <Mail className="w-4 h-4 transition-transform group-hover:scale-110" />
-              {ui.contact.send}
-            </Button>
+            <ContactFormModal>
+              <Button size="lg" className="gap-2 group h-14 px-10 rounded-full text-base font-bold uppercase tracking-widest">
+                <Mail className="w-4 h-4 transition-transform group-hover:scale-110" />
+                {ui.contact.send}
+              </Button>
+            </ContactFormModal>
           </motion.div>
         </motion.div>
       </div>
