@@ -65,13 +65,13 @@ export function EducationSection() {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="relative pl-12 pb-12 last:pb-0"
+              className="relative pl-0 sm:pl-12 pb-12 last:pb-0 text-center sm:text-left"
             >
               {/* Timeline line */}
-              <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
+              <div className="absolute left-0 top-0 bottom-0 w-px bg-border hidden sm:block" />
               
               {/* Timeline dot */}
-              <div className="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-primary" />
+              <div className="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-primary hidden sm:block" />
               
               {/* Content */}
               <div className="bg-card border border-border p-8 hover:border-primary/30 transition-all duration-500 group relative">
@@ -90,7 +90,7 @@ export function EducationSection() {
                 <p className="text-muted-foreground mb-6 text-base leading-relaxed">
                   {item.description}
                 </p>
-                <ul className="grid sm:grid-cols-2 gap-4">
+                <ul className="grid sm:grid-cols-2 gap-4 text-left">
                   {item.items.map((listItem, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
                       <span className="w-1 h-1 bg-primary/50 mt-2 shrink-0 rounded-full" />
