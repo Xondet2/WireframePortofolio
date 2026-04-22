@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowUpRight } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
+import Link from "next/link"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -109,10 +110,12 @@ export function ProjectsSection() {
                   ))}
                 </div>
                 <div className="pt-6">
-                  <Button variant="ghost" size="sm" className="gap-2 p-0 h-auto hover:bg-transparent hover:text-primary group/btn font-bold uppercase tracking-widest text-xs">
-                    {ui.projects.explore}
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
-                  </Button>
+                  <Link href={project.link || "#"} target="_blank" rel="noopener noreferrer">
+                    <Button variant="ghost" size="sm" className="gap-2 p-0 h-auto hover:bg-transparent hover:text-primary group/btn font-bold uppercase tracking-widest text-xs">
+                      {ui.projects.explore}
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
