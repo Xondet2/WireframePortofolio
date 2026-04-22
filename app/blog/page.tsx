@@ -5,30 +5,77 @@ import { Footer } from "@/components/portfolio/footer"
 import { useLanguage } from "@/context/language-context"
 import Link from "next/link"
 import { ArrowRight, Calendar, Clock } from "lucide-react"
+import { motion, Variants } from "framer-motion"
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+    },
+  },
+}
 
 export default function BlogPage() {
-  const { content } = useLanguage()
+  const { content, language } = useLanguage()
   const { blogPosts, ui } = content
 
   return (
-    <main className="min-h-screen bg-background">
+    <motion.main 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-background"
+    >
       <Navbar />
       <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <header className="max-w-3xl mb-16">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
+        <motion.header 
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="max-w-3xl mb-16"
+        >
+          <motion.p variants={itemVariants} className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
             {ui.blog.badge}
-          </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+          </motion.p>
+          <motion.h1 
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6" 
+            style={{ fontFamily: 'var(--font-heading)' }}
+          >
             {ui.blog.title}
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          </motion.h1>
+          <motion.p variants={itemVariants} className="text-xl text-muted-foreground leading-relaxed">
             {ui.blog.subtitle}
-          </p>
-        </header>
+          </motion.p>
+        </motion.header>
 
-        <div className="grid gap-12 max-w-4xl">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="grid gap-12 max-w-4xl"
+        >
           {blogPosts.map((post) => (
-            <article key={post.slug} className="group relative">
+            <motion.article 
+              key={`${post.slug}-${language}`}
+              variants={itemVariants}
+              className="group relative"
+            >
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest font-bold">
                   <div className="flex items-center gap-1">
@@ -64,11 +111,11 @@ export default function BlogPage() {
                   <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
                 </Link>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
       <Footer />
-    </main>
+    </motion.main>
   )
 }
