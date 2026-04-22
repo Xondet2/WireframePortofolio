@@ -162,7 +162,7 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
         title: "AXI – Aplicación de Dibujo Creativo",
         description: "Aplicación enfocada en desarrollar la creatividad mediante ejercicios interactivos para todas las edades.",
         tags: ["Creatividad", "Interactivo", "UI/UX"],
-        link: "#",
+        link: "https://smartmarket-ai.vercel.app/dashboard",
       },
       {
         title: "SmartMarketAI",
@@ -337,7 +337,7 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
         title: "AXI – Creative Drawing App",
         description: "Application focused on developing creativity through interactive exercises for all ages.",
         tags: ["Creativity", "Interactive", "UI/UX"],
-        link: "#",
+        link: "https://smartmarket-ai.vercel.app/dashboard",
       },
       {
         title: "SmartMarketAI",
