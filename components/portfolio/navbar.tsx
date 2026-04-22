@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/language-context"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +26,9 @@ export function Navbar() {
   }, [])
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#") && pathname === "/") {
+    const isHashLink = href.startsWith("/#")
+    
+    if (isHashLink && pathname === "/") {
       e.preventDefault()
       const targetId = href.replace("/#", "")
       const element = document.getElementById(targetId)
@@ -39,6 +42,10 @@ export function Navbar() {
           behavior: "smooth"
         })
       }
+    } else if (isHashLink && pathname !== "/") {
+      // Si estamos en otra página (como /blog), dejamos que el Link navegue a la raíz
+      // El scroll al hash ocurrirá automáticamente al cargar el home
+      setIsOpen(false)
     }
     setIsOpen(false)
   }
@@ -57,11 +64,22 @@ export function Navbar() {
           <Link 
             href="/#inicio"
             onClick={(e) => handleSmoothScroll(e, "/#inicio")}
-            className="text-lg font-bold tracking-tight text-foreground cursor-pointer group"
+            className="flex items-center gap-2 text-lg font-bold tracking-tight text-foreground cursor-pointer group"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            {content.personalInfo.name}
-            <span className="block h-0.5 w-0 bg-primary group-hover:w-full transition-all duration-300" />
+            <div className="relative w-8 h-8 flex items-center justify-center bg-primary/5 rounded-lg border border-primary/10 group-hover:border-primary/30 transition-colors">
+              <Image 
+                src="/gemini-svg.svg" 
+                alt="Logo" 
+                width={20} 
+                height={20} 
+                className="w-5 h-5"
+              />
+            </div>
+            <span>
+              {content.personalInfo.name}
+              <span className="block h-0.5 w-0 bg-primary group-hover:w-full transition-all duration-300" />
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
