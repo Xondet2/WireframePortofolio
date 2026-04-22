@@ -54,6 +54,7 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
       },
     ],
+    shortcut: '/gemini-svg.svg',
     apple: '/gemini-svg.svg',
   },
 }
