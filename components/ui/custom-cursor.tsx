@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { motion, useSpring, useMotionValue } from "framer-motion"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function CustomCursor() {
+  const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
@@ -19,6 +21,8 @@ export function CustomCursor() {
 
   useEffect(() => {
     setMounted(true)
+    if (isMobile) return // No registrar eventos en móvil
+
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
@@ -49,9 +53,9 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", moveCursor)
       window.removeEventListener("mouseover", handleMouseOver)
     }
-  }, [isVisible, mouseX, mouseY])
+  }, [isVisible, mouseX, mouseY, isMobile])
 
-  if (!mounted) return null
+  if (!mounted || isMobile) return null
 
   return (
     <motion.div
@@ -80,7 +84,7 @@ export function CustomCursor() {
           )}
           <motion.span
             animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
+            transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
             className="ml-0.5 inline-block w-1.5 h-3 bg-current"
           />
         </span>
