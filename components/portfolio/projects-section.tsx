@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import Link from "next/link"
+import Image from "next/image"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -75,8 +76,18 @@ export function ProjectsSection() {
             >
               {/* Project Preview */}
               <div className="aspect-video bg-muted border-b border-border flex items-center justify-center overflow-hidden relative">
+                {project.image ? (
+                  <Image 
+                    src={project.image} 
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                ) : (
+                  <span className="text-xs text-muted-foreground uppercase tracking-widest group-hover:scale-110 transition-transform duration-500 z-20">Preview</span>
+                )}
                 <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-                <span className="text-xs text-muted-foreground uppercase tracking-widest group-hover:scale-110 transition-transform duration-500 z-20">Preview</span>
                 
                 {/* Floating tags on image */}
                 <div className="absolute top-4 right-4 flex flex-col gap-2 z-20">
