@@ -11,6 +11,22 @@ export function HeroSection() {
   const { content, language } = useLanguage()
   const { personalInfo, ui } = content
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace("#", "")
+    const element = document.getElementById(targetId)
+    if (element) {
+      const navbarHeight = 80
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+      const offsetPosition = elementPosition - navbarHeight
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <section key={`hero-${language}`} id="inicio" className="min-h-screen flex items-center pt-20 relative overflow-x-clip">
       {/* Background animated elements */}
@@ -105,13 +121,13 @@ export function HeroSection() {
               className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
             >
               <Button asChild size="lg" className="gap-2 h-14 px-8 text-base rounded-full group">
-                <Link href="#proyectos">
+                <Link href="#proyectos" onClick={(e) => handleSmoothScroll(e, "#proyectos")}>
                   {ui.hero.viewProjects}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="gap-2 h-14 px-8 text-base rounded-full hover:bg-primary/5 transition-colors">
-                <Link href="#contacto">
+                <Link href="#contacto" onClick={(e) => handleSmoothScroll(e, "#contacto")}>
                   <Mail className="w-4 h-4" />
                   {ui.hero.contact}
                 </Link>
