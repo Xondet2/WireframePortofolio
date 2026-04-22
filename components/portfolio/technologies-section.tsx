@@ -66,7 +66,8 @@ export function TechnologiesSection() {
               key={tech}
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.05 }}
-              className="px-6 py-3 bg-card border border-border text-sm font-bold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 rounded-full"
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 bg-card border border-border text-[10px] sm:text-sm font-bold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 rounded-full"
             >
               {tech}
             </motion.div>
