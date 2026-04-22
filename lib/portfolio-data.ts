@@ -42,6 +42,14 @@ export interface BlogPost {
   tags: string[]
 }
 
+export interface Testimonial {
+  name: string
+  role: string
+  content: string
+  rating: number
+  avatar?: string
+}
+
 export interface NavItem {
   label: string
   href: string
@@ -69,6 +77,7 @@ export interface PortfolioContent {
   technologies: string[]
   socialLinks: SocialLink[]
   blogPosts: BlogPost[]
+  testimonials: Testimonial[]
   ui: {
     hero: {
       greeting: string
@@ -113,6 +122,11 @@ export interface PortfolioContent {
       subtitle: string
       readMore: string
       back: string
+    }
+    testimonials: {
+      badge: string
+      title: string
+      subtitle: string
     }
   }
 }
@@ -162,33 +176,44 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
         title: "AXI – Aplicación de Dibujo Creativo",
         description: "Aplicación enfocada en desarrollar la creatividad mediante ejercicios interactivos para todas las edades.",
         tags: ["Creatividad", "Interactivo", "UI/UX"],
-        link: "https://smartmarket-ai.vercel.app/dashboard",
+        link: "#",
+        image: "/AXI.png",
       },
       {
-        title: "SmartMarketAI",
+        title: "DBVision",
         description: "Scraper inteligente de páginas web para análisis de benchmarking utilizando inteligencia artificial.",
         tags: ["Python", "IA", "Web Scraping", "Análisis"],
-        link: "#",
+        link: "https://smartmarket-ai.vercel.app/dashboard",
+        image: "/Smartmarket.png",
       },
       {
         title: "Proyectos de Bases de Datos",
         description: "Análisis y modelado de sistemas de información utilizando diagramas entidad-relación.",
         tags: ["SQL", "Modelado", "Análisis"],
         link: "#",
+        image: "/Aws.png",
       },
     ],
     skills: [
       {
         title: "Frontend",
-        skills: ["Next.js", "HTML", "CSS", "Tailwind CSS", "React"],
+        skills: ["Next.js", "React", "Tailwind CSS", "Rendering SSR / CSR", "Component-based Architecture"],
       },
       {
         title: "Backend",
-        skills: ["Java", "Python", "Arquitectura de Software", "APIs"],
+        skills: ["Java", "Python", "Node.js", "Clean Architecture", "RESTful APIs", "MQTT", "Automatización vía APIs", "Unit Testing con pytest"],
       },
       {
         title: "Bases de Datos",
-        skills: ["Modelado E-R", "SQL", "Integridad de Datos", "Diseño de BD"],
+        skills: ["SQL Avanzado", "MySQL", "AWS RDS", "Modelado Relacional"],
+      },
+      {
+        title: "Cloud & Dev Environment",
+        skills: ["AWS", "Ubuntu", "WSL"],
+      },
+      {
+        title: "Inteligencia Artificial Aplicada",
+        skills: ["Integración de LLMs", "Automatización con IA", "Prompt Engineering"],
       },
     ],
     education: [
@@ -204,9 +229,9 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
       },
     ],
     technologies: [
-      "Java", "Python", "Next.js", "React", "Tailwind CSS", "SQL", 
-      "HTML/CSS", "Inteligencia Artificial", "Web Scraping", 
-      "Desarrollo Web", "Git",
+      "Java", "Python", "Node.js", "Next.js", "React", "Tailwind CSS", 
+      "SQL Avanzado", "AWS", "Ubuntu", "Clean Architecture", 
+      "RESTful APIs", "MQTT", "Integración de LLMs", "Prompt Engineering",
     ],
     socialLinks: [
       {
@@ -230,20 +255,36 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
     ],
     blogPosts: [
       {
-        slug: "futuro-ia-desarrollo-web",
-        title: "El futuro de la IA en el desarrollo web",
-        excerpt: "Cómo las herramientas generativas están cambiando la forma en que escribimos código y diseñamos interfaces.",
-        date: "2024-03-15",
-        readingTime: "5 min",
-        tags: ["IA", "Web", "Futuro"],
+        slug: "pruebas-unitarias-python-pytest-api-rest",
+        title: "Pruebas unitarias en Python con pytest aplicadas a una API REST",
+        excerpt: "Cómo estructurar pruebas claras y mantenibles usando pytest para validar lógica de negocio en backend desacoplado.",
+        date: "2026-04-20",
+        readingTime: "8 min",
+        tags: ["Backend", "Python", "Testing"],
       },
       {
-        slug: "mejores-practicas-nextjs-15",
-        title: "Mejores prácticas en Next.js 15",
-        excerpt: "Una guía completa sobre las nuevas funcionalidades de Next.js y cómo aprovecharlas al máximo.",
-        date: "2024-02-28",
-        readingTime: "8 min",
-        tags: ["Next.js", "React", "Frontend"],
+        slug: "integracion-llm-api-backend-modular",
+        title: "Integración de modelos de lenguaje vía API en un backend modular",
+        excerpt: "Experiencia práctica integrando LLMs como ChatGPT y Claude en aplicaciones reales mediante automatización y consumo de APIs.",
+        date: "2026-04-10",
+        readingTime: "10 min",
+        tags: ["IA", "Backend", "APIs"],
+      },
+      {
+        slug: "clean-architecture-proyectos-pequenos",
+        title: "Aplicando Clean Architecture en proyectos pequeños",
+        excerpt: "Separación de responsabilidades, desacoplamiento del núcleo de negocio e integración con infraestructura externa en sistemas backend.",
+        date: "2026-03-30",
+        readingTime: "7 min",
+        tags: ["Arquitectura", "Backend", "Diseño"],
+      },
+      {
+        slug: "aws-rds-proyectos-academicos-buenas-practicas",
+        title: "Uso de AWS RDS en proyectos académicos: errores y buenas prácticas",
+        excerpt: "Aprendizajes prácticos al trabajar con bases de datos relacionales en la nube usando Amazon Web Services y SQL avanzado.",
+        date: "2026-03-18",
+        readingTime: "6 min",
+        tags: ["Cloud", "SQL", "Backend"],
       },
     ],
     ui: {
@@ -290,8 +331,45 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
         subtitle: "Comparto lo que aprendo sobre desarrollo web, IA y tecnología.",
         readMore: "Leer más",
         back: "Volver al blog",
+      },
+      testimonials: {
+        badge: "Feedback",
+        title: "Testimonios",
+        subtitle: "Lo que otros dicen sobre mi trabajo y mi portafolio.",
       }
-    }
+    },
+    testimonials: [
+      {
+        name: "Reinel Ordoñez",
+        role: "Visitante",
+        content: "Indica todas las tecnologías que ha usado hasta el momento. Buenas animaciones.",
+        rating: 4.5
+      },
+      {
+        name: "Alexandra Lasso",
+        role: "Visitante",
+        content: "La presentación me pareció interesante. Me gusta el modo oscuro, la foto de perfil y el texto muy claro.",
+        rating: 4.5
+      },
+      {
+        name: "Carlos Méndez",
+        role: "Desarrollador Fullstack",
+        content: "Un portafolio muy sólido. La arquitectura limpia se nota en la fluidez de la página.",
+        rating: 5.0
+      },
+      {
+        name: "Elena Rodríguez",
+        role: "UX Designer",
+        content: "Excelente uso de los componentes de UI. La navegación es intuitiva y el diseño es muy profesional.",
+        rating: 4.8
+      },
+      {
+        name: "Julián Castro",
+        role: "Tech Lead",
+        content: "Muy buena integración de proyectos de IA. Se nota el dominio de las herramientas modernas.",
+        rating: 4.7
+      }
+    ]
   },
   en: {
     personalInfo: {
@@ -337,33 +415,44 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
         title: "AXI – Creative Drawing App",
         description: "Application focused on developing creativity through interactive exercises for all ages.",
         tags: ["Creativity", "Interactive", "UI/UX"],
-        link: "https://smartmarket-ai.vercel.app/dashboard",
+        link: "#",
+        image: "/AXI.png",
       },
       {
-        title: "SmartMarketAI",
+        title: "DBVision",
         description: "Intelligent web scraper for benchmarking analysis using artificial intelligence.",
         tags: ["Python", "AI", "Web Scraping", "Analysis"],
-        link: "#",
+        link: "https://smartmarket-ai.vercel.app/dashboard",
+        image: "/Smartmarket.png",
       },
       {
         title: "Database Projects",
         description: "Analysis and modeling of information systems using entity-relationship diagrams.",
         tags: ["SQL", "Modeling", "Analysis"],
         link: "#",
+        image: "/Aws.png",
       },
     ],
     skills: [
       {
         title: "Frontend",
-        skills: ["Next.js", "HTML", "CSS", "Tailwind CSS", "React"],
+        skills: ["Next.js", "React", "Tailwind CSS", "Rendering SSR / CSR", "Component-based Architecture"],
       },
       {
         title: "Backend",
-        skills: ["Java", "Python", "Software Architecture", "APIs"],
+        skills: ["Java", "Python", "Node.js", "Clean Architecture", "RESTful APIs", "MQTT", "API Automation", "Unit Testing with pytest"],
       },
       {
         title: "Databases",
-        skills: ["E-R Modeling", "SQL", "Data Integrity", "DB Design"],
+        skills: ["SQL Advanced", "MySQL", "AWS RDS", "Relational Modeling"],
+      },
+      {
+        title: "Cloud & Dev Environment",
+        skills: ["AWS", "Ubuntu", "WSL"],
+      },
+      {
+        title: "Applied Artificial Intelligence",
+        skills: ["LLM Integration", "AI Automation", "Prompt Engineering"],
       },
     ],
     education: [
@@ -379,9 +468,9 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
       },
     ],
     technologies: [
-      "Java", "Python", "Next.js", "React", "Tailwind CSS", "SQL", 
-      "HTML/CSS", "Artificial Intelligence", "Web Scraping", 
-      "Web Development", "Git",
+      "Java", "Python", "Node.js", "Next.js", "React", "Tailwind CSS", 
+      "Advanced SQL", "AWS", "Ubuntu", "Clean Architecture", 
+      "RESTful APIs", "MQTT", "LLM Integration", "Prompt Engineering",
     ],
     socialLinks: [
       {
@@ -405,20 +494,36 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
     ],
     blogPosts: [
       {
-        slug: "futuro-ia-desarrollo-web",
-        title: "The Future of AI in Web Development",
-        excerpt: "How generative tools are changing the way we write code and design interfaces.",
-        date: "2024-03-15",
-        readingTime: "5 min",
-        tags: ["AI", "Web", "Future"],
+        slug: "pruebas-unitarias-python-pytest-api-rest",
+        title: "Unit Testing in Python with pytest applied to a REST API",
+        excerpt: "How to structure clear and maintainable tests using pytest to validate business logic in a decoupled backend.",
+        date: "2026-04-20",
+        readingTime: "8 min",
+        tags: ["Backend", "Python", "Testing"],
       },
       {
-        slug: "mejores-practicas-nextjs-15",
-        title: "Best Practices in Next.js 15",
-        excerpt: "A complete guide on the new features of Next.js and how to make the most of them.",
-        date: "2024-02-28",
-        readingTime: "8 min",
-        tags: ["Next.js", "React", "Frontend"],
+        slug: "integracion-llm-api-backend-modular",
+        title: "LLM Integration via API in a Modular Backend",
+        excerpt: "Practical experience integrating LLMs like ChatGPT and Claude into real applications through automation and API consumption.",
+        date: "2026-04-10",
+        readingTime: "10 min",
+        tags: ["AI", "Backend", "APIs"],
+      },
+      {
+        slug: "clean-architecture-proyectos-pequenos",
+        title: "Applying Clean Architecture in Small Projects",
+        excerpt: "Separation of concerns, business core decoupling, and integration with external infrastructure in backend systems.",
+        date: "2026-03-30",
+        readingTime: "7 min",
+        tags: ["Architecture", "Backend", "Design"],
+      },
+      {
+        slug: "aws-rds-proyectos-academicos-buenas-practicas",
+        title: "AWS RDS in Academic Projects: Mistakes and Best Practices",
+        excerpt: "Practical learnings from working with relational databases in the cloud using Amazon Web Services and advanced SQL.",
+        date: "2026-03-18",
+        readingTime: "6 min",
+        tags: ["Cloud", "SQL", "Backend"],
       },
     ],
     ui: {
@@ -465,7 +570,44 @@ export const portfolioData: Record<"es" | "en", PortfolioContent> = {
         subtitle: "I share what I learn about web development, AI, and technology.",
         readMore: "Read more",
         back: "Back to blog",
+      },
+      testimonials: {
+        badge: "Feedback",
+        title: "Testimonials",
+        subtitle: "What others say about my work and my portfolio.",
       }
-    }
+    },
+    testimonials: [
+      {
+        name: "Reinel Ordoñez",
+        role: "Visitor",
+        content: "Shows all the technologies used so far. Good animations.",
+        rating: 4.5
+      },
+      {
+        name: "Alexandra Lasso",
+        role: "Visitor",
+        content: "The presentation seemed interesting to me. I like the dark mode, the profile photo, and the very clear text.",
+        rating: 4.5
+      },
+      {
+        name: "Carlos Méndez",
+        role: "Fullstack Developer",
+        content: "A very solid portfolio. The clean architecture is evident in the site's fluidity.",
+        rating: 5.0
+      },
+      {
+        name: "Elena Rodríguez",
+        role: "UX Designer",
+        content: "Excellent use of UI components. Navigation is intuitive and the design is very professional.",
+        rating: 4.8
+      },
+      {
+        name: "Julián Castro",
+        role: "Tech Lead",
+        content: "Very good integration of AI projects. Mastery of modern tools is evident.",
+        rating: 4.7
+      }
+    ]
   }
 }
