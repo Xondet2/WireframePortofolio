@@ -12,7 +12,7 @@ export function HeroSection() {
   const { personalInfo, ui } = content
 
   return (
-    <section key={`hero-${language}`} id="inicio" className="min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <section key={`hero-${language}`} id="inicio" className="min-h-screen flex items-center pt-20 relative overflow-x-clip">
       {/* Background animated elements */}
       <motion.div 
         animate={{ 
@@ -34,7 +34,7 @@ export function HeroSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="order-2 lg:order-1 flex justify-center lg:justify-start"
+            className="order-1 flex justify-center lg:justify-start"
           >
             <div className="relative group">
                 <motion.div 
@@ -58,7 +58,7 @@ export function HeroSection() {
           </motion.div>
 
           {/* Content */}
-          <div className="order-1 lg:order-2 space-y-8">
+          <div className="order-2 space-y-8 text-center lg:text-left">
             <div className="space-y-4">
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -73,7 +73,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-foreground text-balance leading-[0.9]"
+                className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-foreground text-balance leading-[1.1] sm:leading-[0.9]"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 {ui.hero.greeting} <span className="text-primary">{personalInfo.name.split(' ')[0]}</span>
@@ -93,7 +93,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-muted-foreground leading-relaxed max-w-lg text-lg"
+              className="text-muted-foreground leading-relaxed max-w-lg text-lg mx-auto lg:mx-0"
             >
               {personalInfo.longDescription}
             </motion.p>
@@ -102,7 +102,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-4 pt-4"
+              className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
             >
               <Button asChild size="lg" className="gap-2 h-14 px-8 text-base rounded-full group">
                 <Link href="#proyectos">
