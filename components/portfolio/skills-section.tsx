@@ -45,12 +45,12 @@ export function SkillsSection() {
           variants={containerVariants}
           className="max-w-3xl mx-auto text-center mb-16"
         >
-          <motion.p variants={itemVariants} className="text-xs font-medium tracking-wider uppercase text-muted-foreground mb-4">
+          <motion.p variants={itemVariants} className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-4">
             {ui.skills.badge}
           </motion.p>
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6"
+            className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             {ui.skills.title}
@@ -87,12 +87,13 @@ export function SkillsSection() {
               
               <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill) => (
-                  <span
+                  <motion.span
                     key={skill}
+                    whileTap={{ scale: 0.95 }}
                     className="px-4 py-2 text-sm bg-muted/50 text-muted-foreground border border-border rounded-full transition-all duration-300 group-hover:bg-primary/10 group-hover:text-primary group-hover:border-primary/20"
                   >
                     {skill}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </motion.div>

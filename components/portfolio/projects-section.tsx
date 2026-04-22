@@ -69,6 +69,7 @@ export function ProjectsSection() {
               key={project.title}
               variants={itemVariants}
               whileHover={{ y: -10 }}
+              whileTap={{ scale: 0.98 }}
               className="group bg-card border border-border overflow-hidden flex flex-col h-full hover:border-primary/30 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(var(--primary),0.1)]"
             >
               {/* Project Preview */}
