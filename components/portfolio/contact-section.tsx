@@ -64,18 +64,18 @@ export function ContactSection() {
               <motion.div key={link.label} variants={itemVariants}>
                 <Link
                   href={link.href}
-                  className="flex items-center justify-between p-6 bg-card border border-border transition-all duration-300 group hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 rounded-2xl"
+                  className="flex flex-col sm:flex-row items-center sm:justify-between p-6 bg-card border border-border transition-all duration-300 group hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 rounded-2xl gap-4 sm:gap-6"
                 >
-                  <div className="flex items-center gap-6">
-                    <div className="w-12 h-12 border border-border flex items-center justify-center transition-all duration-300 group-hover:border-primary/50 group-hover:bg-primary/5 rounded-xl">
+                  <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
+                    <div className="w-12 h-12 border border-border flex items-center justify-center transition-all duration-300 group-hover:border-primary/50 group-hover:bg-primary/5 rounded-xl shrink-0">
                       <link.icon className="w-5 h-5 text-foreground group-hover:text-primary transition-colors" />
                     </div>
-                    <div className="text-left">
+                    <div className="min-w-0">
                       <p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">{link.label}</p>
-                      <p className="text-foreground font-bold text-lg">{link.value}</p>
+                      <p className="text-foreground font-bold text-base sm:text-lg break-all sm:break-normal">{link.value}</p>
                     </div>
                   </div>
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 hidden sm:block" />
                 </Link>
               </motion.div>
             ))}
